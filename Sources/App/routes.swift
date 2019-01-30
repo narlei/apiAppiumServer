@@ -13,8 +13,7 @@ public func routes(_ router: Router) throws {
     }
 
     // Example of configuring a controller
-    let todoController = TodoController()
-    router.get("todos", use: todoController.show)
-    router.post("todos", use: todoController.create)
-    router.delete("todos", Todo.parameter, use: todoController.delete)
+    let todoController = AppiumController()
+    router.get("run", String.parameter, use: todoController.run)
+    router.post("run", Test.parameter, use: todoController.run)
 }
