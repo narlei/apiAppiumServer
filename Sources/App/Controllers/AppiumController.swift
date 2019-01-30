@@ -12,10 +12,11 @@ final class AppiumController {
         let query = try? req.query.decode(Parameter.self)
         
         guard let param = query else {
-            return "Send parameters: {device} and {simulator}"
+            return "Send parameters: {device} and {simulator} and {email}"
         }
         
         let arguments = [
+            "SEND_REPORT=\(param.email ?? "false")",
             "IOS_SIMULATOR=\(param.simulator ?? "false")",
             "npm",
             "run",
