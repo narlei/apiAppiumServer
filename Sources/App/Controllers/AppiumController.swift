@@ -5,20 +5,25 @@ import Vapor
 final class AppiumController {
     /// Returns a list of all `Todo`s.
 
+    
     func run(_ req: Request) throws -> String {
-        let lane = try? req.parameters.next(String.self)
         
-        guard let device = lane else { return "Give the script parameter!"}
+        
+        let query = try? req.query.decode(Parameter.self)
+        
+        guard let param = query else {
+            return "Send parameters: {device} and {simulator}"
+        }
         
         let arguments = [
-            "IOS_SIMULATOR=true",
+            "IOS_SIMULATOR=\(param.simulator ?? "false")",
             "npm",
             "run",
-            device,
+            param.device,
             "--prefix",
             "/Users/eduardofinotti/Documents/Projetos/interface-test-mobile"
         ]
-
+        
         if let a = shellReturn(launchPath: "/usr/bin/env", arguments: arguments) {
             return a
         }

@@ -4,7 +4,7 @@ import Vapor
 public func routes(_ router: Router) throws {
     // Basic "It works" example
     router.get { req in
-        return "It works!"
+        return "Welcome to Tests Interface. Run /run?device=DEVICE_NAME&simulator=true"
     }
     
     // Basic "Hello, world!" example
@@ -14,6 +14,6 @@ public func routes(_ router: Router) throws {
 
     // Example of configuring a controller
     let todoController = AppiumController()
-    router.get("run", String.parameter, use: todoController.run)
-    router.post("run", Test.parameter, use: todoController.run)
+//    router.get("run", String.parameter, String.parameter, use: todoController.run)
+    router.get("run", use: todoController.run)
 }
